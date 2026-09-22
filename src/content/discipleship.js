@@ -6,7 +6,7 @@ export const discipleship = {
   hero: {
     eyebrow: sourced('The discipleship pathway', 'faithchurchleslie.com/engagegroups'),
     headline: approved('A pathway, not a program.'),
-    photo: '/images/from-current-site/IMG_3634_Large-1591768.jpeg',
+    photo: '/images/photos/congregation-portrait.jpg',
     tagline: sourced('Be / Become / Do', 'faithchurchleslie.com/engagegroups'),
   },
 

@@ -152,6 +152,12 @@ export default function About() {
             position="25% center"
           />
         </div>
+        <Photo
+          src="/images/photos/courter-family.jpg"
+          alt="Pastor James and Crystal Courter with their family"
+          aspect="16/9"
+          className="mt-6"
+        />
       </Section>
 
       {/* Differentiators */}

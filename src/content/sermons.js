@@ -7,7 +7,7 @@ export const sermons = {
     eyebrow: sourced('Message Archive', 'faithchurchleslie.com/sermons'),
     headline: approved('Miss a Sunday? Catch up here.'),
     subhead: approved('Biblically grounded teaching, aimed at formation, not just information. Watch past gatherings any time.'),
-    photo: '/images/from-current-site/IMG_4233_Large-1591768.jpeg',
+    photo: '/images/photos/worship-bw.jpg',
   },
 
   currentSeries: sourced('Current series: Roots', 'faithchurchleslie.com/sermons'),

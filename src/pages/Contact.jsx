@@ -24,7 +24,7 @@ export default function Contact() {
         eyebrow={<Copy item={contact.hero.eyebrow} />}
         headline={<Copy item={contact.hero.headline} />}
         subhead={<Copy item={contact.hero.subhead} />}
-        photo="/images/from-current-site/308837470_472385964933964_5522732804867506140_n-5552613.jpg"
+        photo="/images/photos/welcome-teresa.jpg"
         short
       />
 

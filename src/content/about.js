@@ -6,7 +6,7 @@ export const about = {
   hero: {
     eyebrow: 'About Faith Church',
     headline: approved('A history of stepping out in faith.'),
-    photo: '/images/from-current-site/IMG_4233_Large-1591768.jpeg',
+    photo: '/images/photos/james-crystal.jpg',
   },
 
   history: {

@@ -7,7 +7,7 @@ export const events = {
     eyebrow: sourced('Upcoming events', 'faithchurchleslie.com/events'),
     headline: approved('Be with Jesus.'),
     subhead: approved('Gatherings, prayer, classes, and outreach. Here’s what’s next at Faith Church.'),
-    photo: '/images/from-current-site/image-asset-6929259.jpeg',
+    photo: '/images/photos/stage-couple.jpg',
   },
 
   // Sourced recurring rhythm (from /events) — shown as our weekly cadence.

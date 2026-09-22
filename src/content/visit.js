@@ -7,7 +7,7 @@ export const visit = {
     eyebrow: 'Plan your visit',
     headline: approved('Just as you are.'),
     subhead: approved('Come on in. Coffee’s on in the Rooted Pine Café at 9:45 and we saved you a seat at 10. Here’s exactly what your first Sunday looks like.'),
-    photo: '/images/from-current-site/IMG_1195_Large-1591768.jpeg',
+    photo: '/images/photos/exterior-sign.jpg',
   },
 
   facts: {
