@@ -5,6 +5,7 @@ import Button from '../components/Button.jsx';
 import Copy from '../components/Copy.jsx';
 import Reveal from '../components/Reveal.jsx';
 import PhotoNeeded from '../components/PhotoNeeded.jsx';
+import Photo from '../components/Photo.jsx';
 import CountBadge from '../components/CountBadge.jsx';
 import { visit } from '../content/visit.js';
 import { church, links } from '../content/site.js';
@@ -55,7 +56,12 @@ export default function Visit() {
           <PhotoNeeded label="Kids classroom" aspect="4/3" />
           <PhotoNeeded label="Coffee moment before service" aspect="4/3" />
         </div>
-        <PhotoNeeded label="The sanctuary, from the back" aspect="16/9" className="mt-6" />
+        <Photo
+          src="/images/photos/congregation-hands.jpg"
+          alt="The Faith Church sanctuary during Sunday worship, seen from the back"
+          aspect="16/9"
+          className="mt-6"
+        />
       </Section>
 
       {/* Flow */}

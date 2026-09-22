@@ -4,7 +4,7 @@ import Section from '../components/Section.jsx';
 import Button from '../components/Button.jsx';
 import Copy from '../components/Copy.jsx';
 import Reveal from '../components/Reveal.jsx';
-import PhotoNeeded from '../components/PhotoNeeded.jsx';
+import Photo from '../components/Photo.jsx';
 import { about } from '../content/about.js';
 import { links } from '../content/site.js';
 
@@ -49,7 +49,11 @@ export default function About() {
           </Reveal>
         </div>
         <Reveal className="mt-12">
-          <PhotoNeeded label="Church exterior — 4020 N. Main St." aspect="16/9" />
+          <Photo
+            src="/images/photos/exterior-building.jpg"
+            alt="Faith Church building at 4020 N. Main St., Leslie, with the leaf-mark and cross"
+            aspect="16/9"
+          />
         </Reveal>
       </Section>
 
@@ -135,8 +139,18 @@ export default function About() {
           </Reveal>
         </div>
         <div className="mt-10 grid gap-6 sm:grid-cols-2">
-          <PhotoNeeded label="James at the pulpit — mid-message" aspect="4/5" />
-          <PhotoNeeded label="Crystal leading worship" aspect="4/5" />
+          <Photo
+            src="/images/photos/james-worship.jpg"
+            alt="Pastor James Courter on stage during a Sunday service"
+            aspect="4/5"
+            position="60% center"
+          />
+          <Photo
+            src="/images/photos/worship-anniversary.jpg"
+            alt="Crystal Courter leading worship at the keyboard"
+            aspect="4/5"
+            position="25% center"
+          />
         </div>
       </Section>
 
