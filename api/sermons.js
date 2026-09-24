@@ -14,6 +14,10 @@ const FEED = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`
 
 // Titles we don't want in a *sermon* archive.
 const EXCLUDE = /\b(prayer|thursday|midweek|noon|#?shorts?|live now|is live|watch party|kids|announcement)\b/i;
+// The church posts short midweek devotional/quote clips that always carry a
+// hashtag (e.g. "…#LoveYourNeighbor"); the Sunday services/livestreams never
+// do. Dropping hashtagged titles keeps the feed to actual Sunday messages.
+const HASHTAG_CLIP = /#[a-z]/i;
 
 const pick = (block, tag) => {
   const m = block.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`));
@@ -46,6 +50,7 @@ export default async function handler(req, res) {
       const published = pick(e, 'published');
       if (!videoId || !title) continue;
       if (EXCLUDE.test(title)) continue;
+      if (HASHTAG_CLIP.test(title)) continue;
       const key = title.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
       if (seen.has(key)) continue;
       seen.add(key);

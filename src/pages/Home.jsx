@@ -5,7 +5,7 @@ import Button from '../components/Button.jsx';
 import Copy from '../components/Copy.jsx';
 import Reveal from '../components/Reveal.jsx';
 import EventsFeed from '../components/EventsFeed.jsx';
-import LiteYouTube from '../components/LiteYouTube.jsx';
+import RecentSermon from '../components/RecentSermon.jsx';
 import PhotoNeeded from '../components/PhotoNeeded.jsx';
 import CountBadge from '../components/CountBadge.jsx';
 import { home } from '../content/home.js';
@@ -242,15 +242,10 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal delay={0.1} className="md:col-span-7">
-            <div className="relative aspect-video bg-hunter">
-              <LiteYouTube
-                videoId={home.sermons.recentVideoId}
-                title={home.sermons.recentTitle.text}
-              />
-            </div>
-            <p className="mt-3 eyebrow text-burlap">
-              Most recent · <Copy item={home.sermons.recentTitle} />
-            </p>
+            <RecentSermon
+              fallbackId={home.sermons.recentVideoId}
+              fallbackTitle={home.sermons.recentTitle.text}
+            />
           </Reveal>
         </div>
       </Section>
