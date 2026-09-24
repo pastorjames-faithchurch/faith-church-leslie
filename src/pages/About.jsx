@@ -160,6 +160,36 @@ export default function About() {
         />
       </Section>
 
+      {/* Meet our pastors */}
+      <Section id="pastors" labelledBy="pastors-h">
+        <Reveal>
+          <p className="section-label">
+            <Copy item={about.pastors.label} />
+          </p>
+          <h2 id="pastors-h" className="mt-4 font-display font-bold text-3xl md:text-4xl">
+            <Copy item={about.pastors.heading} />
+          </h2>
+        </Reveal>
+        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {about.pastors.team.map((m, i) => (
+            <Reveal as="div" delay={i * 0.06} key={i}>
+              <Photo
+                src={m.photo}
+                alt={`${m.name.text} — ${m.role.text}`}
+                aspect="4/3"
+                position={m.position}
+              />
+              <h3 className="mt-4 font-display font-bold text-xl text-ink leading-snug">
+                <Copy item={m.name} />
+              </h3>
+              <p className="mt-1 eyebrow text-hunter">
+                <Copy item={m.role} />
+              </p>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
       {/* Differentiators */}
       <Section id="different" labelledBy="diff-h">
         <Reveal>

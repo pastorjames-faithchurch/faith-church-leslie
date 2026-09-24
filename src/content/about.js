@@ -59,6 +59,31 @@ export const about = {
     ],
   },
 
+  pastors: {
+    label: approved('The team'),
+    heading: approved('Meet our pastors'),
+    team: [
+      {
+        name: approved('James & Crystal Courter'),
+        role: approved('Lead Pastor & Worship Pastor'),
+        photo: '/images/photos/james-crystal.jpg',
+        position: 'center',
+      },
+      {
+        name: approved('Ben & Dawn Dearman', 'Roy — Sept 2026'),
+        role: approved('Family Life Pastors', 'Roy — Sept 2026'),
+        photo: '/images/photos/stage-couple.jpg',
+        position: 'center',
+      },
+      {
+        name: approved('Teresa DeBaeke', 'Roy — Sept 2026'),
+        role: approved('Discipleship Pastor', 'Roy — Sept 2026'),
+        photo: '/images/photos/welcome-teresa.jpg',
+        position: 'center',
+      },
+    ],
+  },
+
   differentiators: {
     label: approved('What makes Faith different'),
     heading: approved('Intentional Pathway of Slowing Down.'),
