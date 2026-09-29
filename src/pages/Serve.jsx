@@ -64,7 +64,11 @@ export default function Serve() {
           </h2>
         </Reveal>
         <Reveal className="mt-12">
-          <PhotoNeeded label="Fall Festival — Leslie community" aspect="16/9" />
+          <Photo
+            src="/images/photos/fall-festival.jpg"
+            alt="Families at the Faith Church Fall Festival with bounce houses on the lawn"
+            aspect="16/9"
+          />
         </Reveal>
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
           <Photo

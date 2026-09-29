@@ -5,6 +5,7 @@ import Button from '../components/Button.jsx';
 import Copy from '../components/Copy.jsx';
 import Reveal from '../components/Reveal.jsx';
 import PhotoNeeded from '../components/PhotoNeeded.jsx';
+import Photo from '../components/Photo.jsx';
 import CountBadge from '../components/CountBadge.jsx';
 import { discipleship as d } from '../content/discipleship.js';
 import { links } from '../content/site.js';
@@ -35,11 +36,20 @@ export default function Discipleship() {
       />
 
       <Section id="intro">
-        <Reveal>
-          <p className="font-display text-2xl md:text-3xl text-ink leading-snug max-w-3xl">
-            <Copy item={d.intro} />
-          </p>
-        </Reveal>
+        <div className="grid gap-10 md:grid-cols-12 md:items-center">
+          <Reveal className="md:col-span-7">
+            <p className="font-display text-2xl md:text-3xl text-ink leading-snug">
+              <Copy item={d.intro} />
+            </p>
+          </Reveal>
+          <Reveal delay={0.1} className="md:col-span-5">
+            <Photo
+              src="/images/photos/baptism.jpg"
+              alt="A baptism at Faith Church"
+              aspect="4/5"
+            />
+          </Reveal>
+        </div>
       </Section>
 
       {/* The five stops */}

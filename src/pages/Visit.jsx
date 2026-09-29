@@ -57,7 +57,11 @@ export default function Visit() {
             alt="Faith Church greeters holding 'You belong here' and 'Welcome' signs at the entrance"
             aspect="4/3"
           />
-          <PhotoNeeded label="Kids classroom" aspect="4/3" />
+          <Photo
+            src="/images/photos/kids-classroom.jpg"
+            alt="Children playing in the Faith Kids room"
+            aspect="4/3"
+          />
           <Photo
             src="/images/photos/coffee-mugs.jpg"
             alt="Handmade Faith Church coffee mugs with the leaf-mark logo"
