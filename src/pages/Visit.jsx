@@ -52,9 +52,17 @@ export default function Visit() {
       {/* Photo placeholders — the space, and the people in it */}
       <Section>
         <div className="grid gap-6 md:grid-cols-3">
-          <PhotoNeeded label="A greeter at the door" aspect="4/3" />
+          <Photo
+            src="/images/photos/greeters-welcome.jpg"
+            alt="Faith Church greeters holding 'You belong here' and 'Welcome' signs at the entrance"
+            aspect="4/3"
+          />
           <PhotoNeeded label="Kids classroom" aspect="4/3" />
-          <PhotoNeeded label="Coffee moment before service" aspect="4/3" />
+          <Photo
+            src="/images/photos/coffee-mugs.jpg"
+            alt="Handmade Faith Church coffee mugs with the leaf-mark logo"
+            aspect="4/3"
+          />
         </div>
         <Photo
           src="/images/photos/congregation-hands.jpg"

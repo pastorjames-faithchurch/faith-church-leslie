@@ -5,6 +5,7 @@ import Button from '../components/Button.jsx';
 import Copy from '../components/Copy.jsx';
 import Reveal from '../components/Reveal.jsx';
 import PhotoNeeded from '../components/PhotoNeeded.jsx';
+import Photo from '../components/Photo.jsx';
 import { serve } from '../content/serve.js';
 import { links } from '../content/site.js';
 
@@ -66,7 +67,11 @@ export default function Serve() {
           <PhotoNeeded label="Fall Festival — Leslie community" aspect="16/9" />
         </Reveal>
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
-          <PhotoNeeded label="Homecoming Dinner — football team + volunteers" aspect="4/3" />
+          <Photo
+            src="/images/photos/fellowship-dinner.jpg"
+            alt="Faith Church family sharing a meal around tables in the fellowship hall"
+            aspect="4/3"
+          />
           <PhotoNeeded label="Haiti — Arise team on the ground" aspect="4/3" />
         </div>
         <ul className="mt-12 grid gap-6 md:grid-cols-2">
