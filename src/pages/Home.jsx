@@ -6,16 +6,23 @@ import Copy from '../components/Copy.jsx';
 import Reveal from '../components/Reveal.jsx';
 import EventsFeed from '../components/EventsFeed.jsx';
 import RecentSermon from '../components/RecentSermon.jsx';
-import PhotoNeeded from '../components/PhotoNeeded.jsx';
+import Photo from '../components/Photo.jsx';
 import CountBadge from '../components/CountBadge.jsx';
 import { home } from '../content/home.js';
 import { church, links } from '../content/site.js';
 
-// Photo placeholders per Gather/Engage/Serve column (matches column order).
+// Photos per Gather/Engage/Serve column (matches column order).
 const columnPhotos = [
-  'Sunday morning — congregation gathered',
-  'Engage Group around a kitchen table',
-  'Volunteers on a work day — swing set, furnace, food drive',
+  { src: '/images/photos/worship-standing.jpg', alt: 'The congregation standing in worship on a Sunday morning' },
+  { src: '/images/photos/womens-picnic.jpg', alt: 'Women from Faith Church sharing a picnic lunch on a blanket' },
+  { src: '/images/photos/food-packing.jpg', alt: 'Volunteers in gloves packing meals in the gym', position: '50% 40%' },
+];
+
+// "Faces at 9:45" — a row of real Sunday faces.
+const facePhotos = [
+  { src: '/images/photos/teens-sunday.jpg', alt: 'Students grinning from their seats before service' },
+  { src: '/images/photos/nursery-moms.jpg', alt: 'Two moms with their babies on the couch under the FAITH letters' },
+  { src: '/images/photos/couple-worship.jpg', alt: 'A couple arm in arm during Sunday worship' },
 ];
 
 export default function Home() {
@@ -67,7 +74,7 @@ export default function Home() {
         <div className="mt-16 grid gap-10 md:grid-cols-3">
           {home.strategy.columns.map((col, i) => (
             <Reveal as="div" delay={i * 0.08} key={i}>
-              <PhotoNeeded label={columnPhotos[i]} aspect="4/3" className="mb-6" />
+              <Photo {...columnPhotos[i]} aspect="4/3" className="mb-6" />
               <p className="eyebrow text-hunter">
                 <Copy item={col.eyebrow} />
               </p>
@@ -95,9 +102,11 @@ export default function Home() {
             <Copy item={home.visit.heading} />
           </h2>
         </Reveal>
-        <Reveal className="mt-12">
-          <PhotoNeeded label="Faces at 9:45 with coffee" aspect="16/9" />
-        </Reveal>
+        <div className="mt-12 grid gap-4 grid-cols-3">
+          {facePhotos.map((p, i) => (
+            <Photo key={i} {...p} aspect="1/1" />
+          ))}
+        </div>
         <div className="mt-14 grid gap-10 md:grid-cols-3">
           {home.visit.items.map((item, i) => (
             <Reveal delay={i * 0.08} key={i}>

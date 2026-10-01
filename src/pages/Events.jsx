@@ -3,6 +3,7 @@ import Hero from '../components/Hero.jsx';
 import Section from '../components/Section.jsx';
 import Copy from '../components/Copy.jsx';
 import Reveal from '../components/Reveal.jsx';
+import Photo from '../components/Photo.jsx';
 import EventsFeed from '../components/EventsFeed.jsx';
 import { events } from '../content/events.js';
 
@@ -37,8 +38,31 @@ export default function Events() {
         </div>
       </Section>
 
+      {/* Around here lately */}
+      <Section id="lately" tone="kraft" labelledBy="lately-h">
+        <Reveal>
+          <h2 id="lately-h" className="font-display font-bold text-3xl md:text-4xl">
+            Around here lately
+          </h2>
+        </Reveal>
+        <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          <Photo
+            src="/images/photos/hay-ride.jpg"
+            alt="A wagon full of bundled-up friends on a winter hay ride through town"
+            aspect="4/3"
+            className="sm:col-span-2"
+          />
+          <Photo
+            src="/images/photos/bounce-house.jpg"
+            alt="Kids and volunteers by the bounce house at an outdoor church event"
+            aspect="1/1"
+            className="sm:self-end"
+          />
+        </div>
+      </Section>
+
       {/* Weekly rhythm */}
-      <Section id="rhythm" tone="kraft" labelledBy="rhythm-h">
+      <Section id="rhythm" labelledBy="rhythm-h">
         <Reveal>
           <p className="section-label"><Copy item={events.rhythm.label} /></p>
           <h2 id="rhythm-h" className="mt-4 font-display font-bold text-3xl md:text-4xl">

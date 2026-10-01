@@ -4,7 +4,6 @@ import Section from '../components/Section.jsx';
 import Button from '../components/Button.jsx';
 import Copy from '../components/Copy.jsx';
 import Reveal from '../components/Reveal.jsx';
-import PhotoNeeded from '../components/PhotoNeeded.jsx';
 import Photo from '../components/Photo.jsx';
 import { serve } from '../content/serve.js';
 import { links } from '../content/site.js';
@@ -76,7 +75,24 @@ export default function Serve() {
             alt="Faith Church family sharing a meal around tables in the fellowship hall"
             aspect="4/3"
           />
-          <PhotoNeeded label="Haiti — Arise team on the ground" aspect="4/3" />
+          <Photo
+            src="/images/photos/shoebox-team.jpg"
+            alt="The Operation Christmas Child team in red shirts at the shoebox table"
+            aspect="4/3"
+          />
+        </div>
+        {/* Small-source photos (414px) — kept in a narrower row so they stay sharp. */}
+        <div className="mt-6 grid max-w-2xl gap-6 grid-cols-2">
+          <Photo
+            src="/images/photos/haiti-team.jpg"
+            alt="Faith Church friends with the Arise team in the sanctuary"
+            aspect="1/1"
+          />
+          <Photo
+            src="/images/photos/vbs-huddle.jpg"
+            alt="VBS leaders in green shirts huddled with kids on the lawn"
+            aspect="1/1"
+          />
         </div>
         <ul className="mt-12 grid gap-6 md:grid-cols-2">
           {serve.ways.items.map((w, i) => (

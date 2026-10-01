@@ -4,16 +4,15 @@ import Section from '../components/Section.jsx';
 import Button from '../components/Button.jsx';
 import Copy from '../components/Copy.jsx';
 import Reveal from '../components/Reveal.jsx';
-import PhotoNeeded from '../components/PhotoNeeded.jsx';
 import Photo from '../components/Photo.jsx';
 import CountBadge from '../components/CountBadge.jsx';
 import { discipleship as d } from '../content/discipleship.js';
 import { links } from '../content/site.js';
 
-// Photo placeholders keyed by pathway stop number (only where a photo helps).
+// Photos keyed by pathway stop number (only where a photo helps).
 const stopPhotos = {
-  2: 'Rooted class — group of 10-15',
-  4: 'Emotionally Healthy Discipleship — small group',
+  2: { src: '/images/photos/altar-prayer.jpg', alt: 'Pastor James praying as people kneel at the front' },
+  4: { src: '/images/photos/girl-praying.jpg', alt: 'A girl lying on the floor with eyes closed, praying' },
 };
 
 export default function Discipleship() {
@@ -65,8 +64,8 @@ export default function Discipleship() {
                   <Copy item={stop.name} />
                 </h2>
                 {stopPhotos[stop.n] && (
-                  <PhotoNeeded
-                    label={stopPhotos[stop.n]}
+                  <Photo
+                    {...stopPhotos[stop.n]}
                     aspect="1/1"
                     className="mt-5 max-w-[260px]"
                   />

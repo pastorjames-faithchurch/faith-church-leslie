@@ -4,6 +4,7 @@ import Section from '../components/Section.jsx';
 import Button from '../components/Button.jsx';
 import Copy from '../components/Copy.jsx';
 import Reveal from '../components/Reveal.jsx';
+import Photo from '../components/Photo.jsx';
 import SermonsFeed from '../components/SermonsFeed.jsx';
 import { sermons } from '../content/sermons.js';
 import { links } from '../content/site.js';
@@ -46,14 +47,23 @@ export default function Sermons() {
           <SermonsFeed fallback={sermons.recent} limit={6} />
         </div>
 
-        <Reveal className="mt-14 border-t border-burlap/25 pt-8">
-          <p className="font-body text-lg text-burlap max-w-2xl leading-relaxed">
-            <Copy item={sermons.archiveNote} />
-          </p>
-          <Button href={links.youtube} className="mt-6">
-            Watch the full archive
-          </Button>
-        </Reveal>
+        <div className="mt-14 border-t border-burlap/25 pt-8 grid gap-10 md:grid-cols-12 md:items-center">
+          <Reveal className="md:col-span-7">
+            <p className="font-body text-lg text-burlap max-w-2xl leading-relaxed">
+              <Copy item={sermons.archiveNote} />
+            </p>
+            <Button href={links.youtube} className="mt-6">
+              Watch the full archive
+            </Button>
+          </Reveal>
+          <Reveal delay={0.1} className="md:col-span-5">
+            <Photo
+              src="/images/photos/james-praying.jpg"
+              alt="Pastor James and the church laying hands on someone in prayer"
+              aspect="4/5"
+            />
+          </Reveal>
+        </div>
       </Section>
     </PageShell>
   );
