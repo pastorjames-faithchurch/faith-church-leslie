@@ -8,6 +8,13 @@ import Photo from '../components/Photo.jsx';
 import { about } from '../content/about.js';
 import { links } from '../content/site.js';
 
+// Pastor emails: the address is built only when someone clicks, so there's no
+// "name@domain" string in the HTML or JS bundle for spam harvesters to scrape.
+const MAIL_DOMAIN = ['faithchurchleslie', 'com'].join('.');
+function openMail(user) {
+  window.location.href = `mailto:${user}@${MAIL_DOMAIN}`;
+}
+
 export default function About() {
   return (
     <PageShell
@@ -185,12 +192,14 @@ export default function About() {
               <p className="mt-1 eyebrow text-hunter">
                 <Copy item={m.role} />
               </p>
-              {m.email && (
-                <p className="mt-2 font-body">
-                  <a href={`mailto:${m.email}`} className="link-fc break-all">
-                    {m.email}
-                  </a>
-                </p>
+              {m.emailUser && (
+                <Button
+                  variant="ghost"
+                  className="mt-4"
+                  onClick={() => openMail(m.emailUser)}
+                >
+                  {m.emailLabel}
+                </Button>
               )}
             </Reveal>
           ))}
