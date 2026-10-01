@@ -114,37 +114,49 @@ export default function EventsFeed({ limit = 3 }) {
           <Reveal
             key={e.id}
             delay={i * 0.06}
-            className="flex flex-col bg-manila border border-burlap/20 p-7"
+            className="flex flex-col bg-manila border border-burlap/20 overflow-hidden"
           >
-            <p className="eyebrow text-hunter">
-              {e.recurrence || formatWhen(e.startsAt, e.allDay)}
-            </p>
-            <h3 className="mt-3 font-display font-bold text-xl text-ink leading-snug">
-              {e.name}
-            </h3>
-            {e.recurrence && formatWhen(e.startsAt, e.allDay) && (
-              <p className="mt-1 font-body text-sm text-burlap/80">
-                Next: {formatWhen(e.startsAt, e.allDay)}
+            {e.imageUrl && (
+              <div className="aspect-video w-full overflow-hidden bg-kraft">
+                <img
+                  src={e.imageUrl}
+                  alt={e.name}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            )}
+            <div className="flex flex-grow flex-col p-7">
+              <p className="eyebrow text-hunter">
+                {e.recurrence || formatWhen(e.startsAt, e.allDay)}
               </p>
-            )}
-            {e.summary && (
-              <p className="mt-3 font-body text-burlap leading-relaxed">
-                {e.summary}
-              </p>
-            )}
-            {e.location && (
-              <p className="mt-4 font-body text-sm text-burlap/80">{e.location}</p>
-            )}
-            {e.registrationUrl && (
-              <a
-                href={e.registrationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 link-fc font-body font-semibold uppercase text-sm tracking-[0.12em]"
-              >
-                Learn more →
-              </a>
-            )}
+              <h3 className="mt-3 font-display font-bold text-xl text-ink leading-snug">
+                {e.name}
+              </h3>
+              {e.recurrence && formatWhen(e.startsAt, e.allDay) && (
+                <p className="mt-1 font-body text-sm text-burlap/80">
+                  Next: {formatWhen(e.startsAt, e.allDay)}
+                </p>
+              )}
+              {e.summary && (
+                <p className="mt-3 font-body text-burlap leading-relaxed">
+                  {e.summary}
+                </p>
+              )}
+              {e.location && (
+                <p className="mt-4 font-body text-sm text-burlap/80">{e.location}</p>
+              )}
+              {e.registrationUrl && (
+                <a
+                  href={e.registrationUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 link-fc font-body font-semibold uppercase text-sm tracking-[0.12em] self-start"
+                >
+                  Learn more →
+                </a>
+              )}
+            </div>
           </Reveal>
         ))}
       </div>
