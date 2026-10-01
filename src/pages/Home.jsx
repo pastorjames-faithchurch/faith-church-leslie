@@ -18,8 +18,9 @@ const columnPhotos = [
   { src: '/images/photos/food-packing.jpg', alt: 'Volunteers in gloves packing meals in the gym', position: '50% 40%' },
 ];
 
-// "Faces at 9:45" — a row of real Sunday faces.
+// "Faces at 9:45 with coffee" — the café mugs plus real Sunday faces.
 const facePhotos = [
+  { src: '/images/photos/coffee-mugs.jpg', alt: 'Faith Church mugs on the shelf in the Rooted Pine Café' },
   { src: '/images/photos/teens-sunday.jpg', alt: 'Students grinning from their seats before service' },
   { src: '/images/photos/nursery-moms.jpg', alt: 'Two moms with their babies on the couch under the FAITH letters' },
   { src: '/images/photos/couple-worship.jpg', alt: 'A couple arm in arm during Sunday worship' },
@@ -102,7 +103,7 @@ export default function Home() {
             <Copy item={home.visit.heading} />
           </h2>
         </Reveal>
-        <div className="mt-12 grid gap-4 grid-cols-3">
+        <div className="mt-12 grid gap-4 grid-cols-2 md:grid-cols-4">
           {facePhotos.map((p, i) => (
             <Photo key={i} {...p} aspect="1/1" />
           ))}
