@@ -9,6 +9,15 @@ import CountBadge from '../components/CountBadge.jsx';
 import { discipleship as d } from '../content/discipleship.js';
 import { links } from '../content/site.js';
 
+// Photo for a pathway stop, keyed by stop number (only Rooted for now — Roy
+// pulled the EHD photo; don't add one there without asking).
+const stopPhotos = {
+  2: {
+    src: '/images/photos/rooted-cafe-table.jpg',
+    alt: 'A Rooted Experience group laughing around a café table',
+  },
+};
+
 export default function Discipleship() {
   return (
     <PageShell
@@ -57,6 +66,10 @@ export default function Discipleship() {
                 <h2 className="mt-2 font-display font-bold text-2xl md:text-3xl">
                   <Copy item={stop.name} />
                 </h2>
+                {/* 600px source — capped so it stays sharp. */}
+                {stopPhotos[stop.n] && (
+                  <Photo {...stopPhotos[stop.n]} aspect="4/3" className="mt-5 max-w-[300px]" />
+                )}
               </div>
               <div className="md:col-span-8 grid gap-5 sm:grid-cols-3">
                 <div>
