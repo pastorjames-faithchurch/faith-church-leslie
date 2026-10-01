@@ -43,31 +43,45 @@ export default async function handler(req, res) {
       if (inc.type === 'Event') eventsById[inc.id] = inc.attributes || {};
     }
 
-    const events = (data.data || [])
+    const mapped = (data.data || [])
       .map((inst) => {
         const a = inst.attributes || {};
         const rel = inst.relationships?.event?.data;
         const ev = (rel && eventsById[rel.id]) || {};
         return {
           id: inst.id,
+          eventId: rel?.id || inst.id,
           name: ev.name || 'Faith Church Event',
           summary: ev.summary || '',
           startsAt: a.starts_at,
           endsAt: a.ends_at,
           allDay: !!a.all_day_event,
+          // "Every Sunday", "Weekly on Thursday", etc. — lets the UI show one
+          // row for a recurring event instead of listing every occurrence.
+          recurrence: a.compact_recurrence_description || a.recurrence_description || '',
           location: a.location || '',
           // church_center_url is the public detail/registration page for the
           // occurrence; fall back to the event's registration_url.
           registrationUrl: a.church_center_url || ev.registration_url || '',
           imageUrl: ev.image_url || '',
-          // keep for filtering below
           _visible: ev.visible_in_church_center,
         };
       })
       // Public calendar only. If the attribute is missing (older API), keep it
       // rather than hide everything.
-      .filter((e) => e._visible !== false && e.startsAt)
-      .map(({ _visible, ...e }) => e);
+      .filter((e) => e._visible !== false && e.startsAt);
+
+    // Collapse recurring events to a single card (their next upcoming
+    // occurrence). Instances arrive ordered by starts_at, so the first time we
+    // see an eventId is its soonest future occurrence.
+    const seen = new Set();
+    const events = mapped
+      .filter((e) => {
+        if (seen.has(e.eventId)) return false;
+        seen.add(e.eventId);
+        return true;
+      })
+      .map(({ _visible, eventId, ...e }) => e);
 
     res.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate=3600');
     return res.status(200).json({ events, source: 'live' });

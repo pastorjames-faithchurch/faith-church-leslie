@@ -36,7 +36,7 @@ const CLIENT_FALLBACK = [
   },
 ];
 
-function formatWhen(iso) {
+function formatWhen(iso, allDay = false) {
   if (!iso) return '';
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return '';
@@ -44,8 +44,8 @@ function formatWhen(iso) {
     weekday: 'short',
     month: 'short',
     day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
+    // All-day events carry a midnight time that shouldn't be shown.
+    ...(allDay ? {} : { hour: 'numeric', minute: '2-digit' }),
     timeZone: 'America/New_York',
   }).format(d);
 }
@@ -116,10 +116,17 @@ export default function EventsFeed({ limit = 3 }) {
             delay={i * 0.06}
             className="flex flex-col bg-manila border border-burlap/20 p-7"
           >
-            <p className="eyebrow text-hunter">{formatWhen(e.startsAt)}</p>
+            <p className="eyebrow text-hunter">
+              {e.recurrence || formatWhen(e.startsAt, e.allDay)}
+            </p>
             <h3 className="mt-3 font-display font-bold text-xl text-ink leading-snug">
               {e.name}
             </h3>
+            {e.recurrence && formatWhen(e.startsAt, e.allDay) && (
+              <p className="mt-1 font-body text-sm text-burlap/80">
+                Next: {formatWhen(e.startsAt, e.allDay)}
+              </p>
+            )}
             {e.summary && (
               <p className="mt-3 font-body text-burlap leading-relaxed">
                 {e.summary}
