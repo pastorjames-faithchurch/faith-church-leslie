@@ -26,7 +26,7 @@ Every string in src/content/*.js is either `{ text, source: "url" }` (from the c
 Uses the evergreen-forest photo (`black-forest-…jpg`), NOT the Kingdom Builders text-graphic (which had baked-in wording that fought the headline). The KB graphic now sits in the /give "Where it goes" section.
 
 ## Deploy — ACTUAL mechanism (overrides any "Roy deploys manually" note elsewhere)
-GitHub → Vercel auto-deploy is live and connected. **Push to `main` and Vercel redeploys automatically** — this is the real, current pipeline, confirmed working across multiple commits. Do not use the local `vercel` CLI (not linked in this environment); just commit + push. Roy has asked for pushes to be autonomous — don't ask permission per-commit, just push and report what shipped.
+GitHub → Vercel auto-deploy is live and connected. **Push to `main` and Vercel redeploys automatically** — this is the real, current pipeline, confirmed working across multiple commits. Do not use the local `vercel` CLI (not linked in this environment); just commit + push. **Pastor James reviews every change before it goes live (Oct 2026, replaces Roy's earlier "push autonomously" instruction):** commit locally, show him what changed (and a local preview when it's visual), and push only after he says yes.
 
 ## Read-only source files (do NOT re-read unless editing)
 - ../_build-new-faith-church-site.md (master spec, ~10KB)
