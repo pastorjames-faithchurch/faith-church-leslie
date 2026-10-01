@@ -2,12 +2,19 @@
  * Vercel serverless function — Planning Center Calendar feed.
  *
  * Reads PCO credentials from environment variables (never the client) and
- * returns a normalized events array. With no credentials configured it returns
- * mock data so the site works in development and before James sends his token.
+ * returns a normalized, public-only events array. With no credentials
+ * configured it returns mock data so the site works in development and before
+ * the Personal Access Token is added in Vercel.
  *
  * Env vars (set in Vercel project settings):
- *   PCO_APP_ID
- *   PCO_SECRET
+ *   PCO_APP_ID   — Personal Access Token Application ID
+ *   PCO_SECRET   — Personal Access Token Secret
+ *
+ * Why event_instances (not events): the Calendar `events` endpoint returns
+ * event *definitions* without reliable per-occurrence dates, and includes
+ * internal/staff events. `event_instances` are the actual dated occurrences;
+ * `?filter=future` gives upcoming ones, and `include=event` lets us keep only
+ * events marked visible in Church Center (i.e. the public-facing calendar).
  */
 export default async function handler(req, res) {
   const APP_ID = process.env.PCO_APP_ID;
@@ -17,24 +24,51 @@ export default async function handler(req, res) {
     return res.status(200).json({ events: MOCK_EVENTS, source: 'mock' });
   }
 
-  const auth =
-    'Basic ' + Buffer.from(`${APP_ID}:${SECRET}`).toString('base64');
+  const auth = 'Basic ' + Buffer.from(`${APP_ID}:${SECRET}`).toString('base64');
   const url =
-    'https://api.planningcenteronline.com/calendar/v2/events?filter=future&per_page=20&order=starts_at';
+    'https://api.planningcenteronline.com/calendar/v2/event_instances' +
+    '?filter=future&order=starts_at&per_page=50&include=event';
 
   try {
-    const r = await fetch(url, { headers: { Authorization: auth } });
+    const r = await fetch(url, {
+      headers: { Authorization: auth, Accept: 'application/json' },
+    });
     if (!r.ok) throw new Error(`PCO ${r.status}`);
     const data = await r.json();
-    const events = (data.data || []).map((e) => ({
-      id: e.id,
-      name: e.attributes.name,
-      summary: e.attributes.summary,
-      startsAt: e.attributes.starts_at,
-      endsAt: e.attributes.ends_at,
-      location: e.attributes.location,
-      registrationUrl: e.attributes.registration_url,
-    }));
+
+    // Index the included event definitions by id so each instance can read its
+    // parent event's name/summary/visibility.
+    const eventsById = {};
+    for (const inc of data.included || []) {
+      if (inc.type === 'Event') eventsById[inc.id] = inc.attributes || {};
+    }
+
+    const events = (data.data || [])
+      .map((inst) => {
+        const a = inst.attributes || {};
+        const rel = inst.relationships?.event?.data;
+        const ev = (rel && eventsById[rel.id]) || {};
+        return {
+          id: inst.id,
+          name: ev.name || 'Faith Church Event',
+          summary: ev.summary || '',
+          startsAt: a.starts_at,
+          endsAt: a.ends_at,
+          allDay: !!a.all_day_event,
+          location: a.location || '',
+          // church_center_url is the public detail/registration page for the
+          // occurrence; fall back to the event's registration_url.
+          registrationUrl: a.church_center_url || ev.registration_url || '',
+          imageUrl: ev.image_url || '',
+          // keep for filtering below
+          _visible: ev.visible_in_church_center,
+        };
+      })
+      // Public calendar only. If the attribute is missing (older API), keep it
+      // rather than hide everything.
+      .filter((e) => e._visible !== false && e.startsAt)
+      .map(({ _visible, ...e }) => e);
+
     res.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate=3600');
     return res.status(200).json({ events, source: 'live' });
   } catch (err) {
@@ -45,9 +79,9 @@ export default async function handler(req, res) {
 }
 
 /**
- * Fallback / development data. Seeded from the current site's live event list
- * (crawled 2026-07-22) so the mock feels real: the recurring rhythm plus the
- * fixed 50th-anniversary date. The <EventsFeed> flags this copy as proposed.
+ * Fallback / development data — only shown when credentials are absent or the
+ * PCO request fails. Seeded from the current site's event list so it reads real.
+ * <EventsFeed> flags non-live data with a visible "sample" note.
  */
 const MOCK_EVENTS = [
   {
