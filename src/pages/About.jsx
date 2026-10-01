@@ -185,6 +185,13 @@ export default function About() {
               <p className="mt-1 eyebrow text-hunter">
                 <Copy item={m.role} />
               </p>
+              {m.email && (
+                <p className="mt-2 font-body">
+                  <a href={`mailto:${m.email}`} className="link-fc break-all">
+                    {m.email}
+                  </a>
+                </p>
+              )}
             </Reveal>
           ))}
         </div>

@@ -9,12 +9,6 @@ import CountBadge from '../components/CountBadge.jsx';
 import { discipleship as d } from '../content/discipleship.js';
 import { links } from '../content/site.js';
 
-// Photos keyed by pathway stop number (only where a photo helps).
-const stopPhotos = {
-  2: { src: '/images/photos/altar-prayer.jpg', alt: 'Pastor James praying as people kneel at the front' },
-  4: { src: '/images/photos/girl-praying.jpg', alt: 'A girl lying on the floor with eyes closed, praying' },
-};
-
 export default function Discipleship() {
   return (
     <PageShell
@@ -63,13 +57,6 @@ export default function Discipleship() {
                 <h2 className="mt-2 font-display font-bold text-2xl md:text-3xl">
                   <Copy item={stop.name} />
                 </h2>
-                {stopPhotos[stop.n] && (
-                  <Photo
-                    {...stopPhotos[stop.n]}
-                    aspect="1/1"
-                    className="mt-5 max-w-[260px]"
-                  />
-                )}
               </div>
               <div className="md:col-span-8 grid gap-5 sm:grid-cols-3">
                 <div>
@@ -106,13 +93,21 @@ export default function Discipleship() {
             <p className="mt-5 font-body text-lg text-burlap leading-relaxed max-w-xl">
               <Copy item={d.classes.body} />
             </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              {d.ctas.map((c) => (
+                <Button key={c.label} variant={c.variant} href={links[c.href]}>
+                  {c.label}
+                </Button>
+              ))}
+            </div>
           </Reveal>
-          <Reveal delay={0.1} className="md:col-span-5 flex flex-col gap-4 md:items-end">
-            {d.ctas.map((c) => (
-              <Button key={c.label} variant={c.variant} href={links[c.href]}>
-                {c.label}
-              </Button>
-            ))}
+          {/* 414px source — capped so it stays sharp. */}
+          <Reveal delay={0.1} className="md:col-span-5 md:justify-self-end w-full max-w-[400px]">
+            <Photo
+              src="/images/photos/altar-prayer.jpg"
+              alt="Pastor James teaching as people pray at the front"
+              aspect="1/1"
+            />
           </Reveal>
         </div>
       </Section>
