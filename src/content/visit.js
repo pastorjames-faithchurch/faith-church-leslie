@@ -20,7 +20,7 @@ export const visit = {
     label: approved('What to expect'),
     heading: approved('Your first Sunday, start to finish.'),
     steps: [
-      { title: approved('Arrive at 9:45'), body: approved('Pull in off North Main — there’s plenty of parking. Grab coffee in the foyer and let someone say hello before anything official starts.') },
+      { title: approved('Arrive at 9:45'), body: approved('Pull in off North Main — there’s plenty of parking. Grab coffee in the Rooted Pine Cafe in the Steadman Commons and let someone say hello before anything official starts.') },
       { title: approved('Worship at 10:00'), body: approved('Music you can actually sing. Expression is real and unforced — you’re welcome to engage however you’re comfortable.') },
       { title: approved('Biblically grounded teaching'), body: approved('Preaching for formation, not just information — plain-spoken, honest about hard things, rooted in Scripture. The whole gathering runs about 90 minutes.') },
       { title: approved('Stay after'), body: approved('Ask anybody anything. Where your kids went, how Engage Groups work, what “Welcome to Faith” is. No one will rush you out.') },
