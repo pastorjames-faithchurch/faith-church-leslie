@@ -87,15 +87,15 @@ export const home = {
     cta: { label: 'Find your Engage Group', href: 'engageGroupsReg' },
   },
 
-  // Sent into the mess — James edited the section label (#14); the heading,
-  // body, and verse (old #15–17) he did not address, so they stay proposed.
+  // Sent into the mess — James edited the section label (#14) in Sept and
+  // replaced the heading/body (old #15–16) in Oct 2026 so it doesn't name
+  // specific projects. The verse (old #17) he has not addressed.
   serve: {
     label: approved('Called into the places of our world and our local communities.'),
-    heading: proposed('home-mess-h', 'Swing sets for single moms. Furnaces for neighbors. Haiti.', 'Heading — verbatim from Brand Guide Pillar 4. NOT yet reviewed by James.'),
-    body: proposed(
-      'home-mess-body',
-      'Football team dinners. A decade in Haiti in the leadership’s bones. A church that doesn’t tidy up suffering before it shows up in it. We go where it hurts.',
-      'Body — Brand Guide voice; carries the Haiti differentiator. NOT yet reviewed by James.'
+    heading: approved('Slow enough to notice. Close enough to help.', 'Pastor James — Oct 2026'),
+    body: approved(
+      'When we stop rushing, we start seeing the people around us — the neighbor who’s struggling, the family who needs a hand, the friend across the ocean. We go where it hurts, because that’s where Jesus goes.',
+      'Pastor James — Oct 2026'
     ),
     scripture: {
       quote: proposed('home-mess-verse', 'He gives seed to the sower.', 'Scripture card (2 Cor. 9:10 paraphrase). NOT yet reviewed by James.'),

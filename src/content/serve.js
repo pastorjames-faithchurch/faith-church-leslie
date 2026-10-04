@@ -1,4 +1,4 @@
-import { sourced, proposed } from './_helpers.js';
+import { sourced, proposed, approved } from './_helpers.js';
 
 /** Serve — Kingdom Builders + "Sent into the mess". Kingdom Builders partners
  *  are sourced; the pillar framing and outreach examples are proposed. */
@@ -6,7 +6,7 @@ export const serve = {
   hero: {
     eyebrow: proposed('serve-hero-eyebrow', 'Sent into the mess', 'Hero eyebrow — Pillar 4.'),
     headline: proposed('serve-hero-h', 'We go where it hurts.', 'Hero headline.'),
-    subhead: proposed('serve-hero-sub', 'Swing sets for single moms. Furnaces for neighbors. Football team dinners. A decade in Haiti in our bones. We don’t tidy up suffering before we show up in it.', 'Hero subhead — Brand Guide Pillar 4 verbatim + voice.'),
+    subhead: approved('Slow enough to notice. Close enough to help. When we stop rushing, we start seeing the people around us — the neighbor who’s struggling, the family who needs a hand, the friend across the ocean.', 'Pastor James — Oct 2026'),
     photo: '/images/from-current-site/349087265_997215534646356_8924343448091739074_n-2288164.jpg',
   },
 
