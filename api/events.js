@@ -20,6 +20,25 @@ export default async function handler(req, res) {
   const APP_ID = process.env.PCO_APP_ID;
   const SECRET = process.env.PCO_SECRET;
 
+  // TEMPORARY diagnostic (remove once the live feed works): /api/events?debug=1
+  // reports which Vercel project/deployment answered and whether the PCO keys
+  // are present. Names and yes/no only — never values.
+  if (req.query?.debug === '1') {
+    const env = process.env;
+    return res.status(200).json({
+      hasAppId: !!APP_ID,
+      hasSecret: !!SECRET,
+      pcoLikeVarNames: Object.keys(env).filter((k) => /pco/i.test(k)),
+      vercelEnv: env.VERCEL_ENV || null,
+      deploymentUrl: env.VERCEL_URL || null,
+      projectProductionUrl: env.VERCEL_PROJECT_PRODUCTION_URL || null,
+      gitRepo: env.VERCEL_GIT_REPO_OWNER
+        ? `${env.VERCEL_GIT_REPO_OWNER}/${env.VERCEL_GIT_REPO_SLUG}`
+        : null,
+      gitCommit: (env.VERCEL_GIT_COMMIT_SHA || '').slice(0, 7) || null,
+    });
+  }
+
   if (!APP_ID || !SECRET) {
     return res.status(200).json({ events: MOCK_EVENTS, source: 'mock' });
   }
