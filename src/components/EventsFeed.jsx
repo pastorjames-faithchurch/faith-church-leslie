@@ -6,8 +6,7 @@ import ProposedString from './ProposedString.jsx';
  * Upcoming-events feed. Fetches /api/events on mount (Vercel serverless →
  * Planning Center). If the request fails — e.g. `npm run dev`, which has no
  * serverless runtime — it falls back to a small client-side sample so the page
- * still renders for review. When the data isn't the live PCO feed, a proposed
- * footnote flags it.
+ * still renders for review. Events that have already ended are filtered out.
  *
  * Props:
  *   limit  — max cards (default 3 for the home teaser; null = all)
@@ -50,6 +49,16 @@ function formatWhen(iso, allDay = false) {
   }).format(d);
 }
 
+// Never show an event that has already ended (guards against stale sample
+// data or a cached feed listing past dates as "upcoming").
+function upcoming(list) {
+  const now = Date.now();
+  return list.filter((e) => {
+    const t = new Date(e.endsAt || e.startsAt).getTime();
+    return Number.isNaN(t) || t >= now;
+  });
+}
+
 function Skeleton() {
   return (
     <div className="grid gap-6 md:grid-cols-3" aria-hidden="true">
@@ -63,7 +72,6 @@ function Skeleton() {
 export default function EventsFeed({ limit = 3 }) {
   const [status, setStatus] = useState('loading'); // loading | ready
   const [events, setEvents] = useState([]);
-  const [source, setSource] = useState('mock');
 
   useEffect(() => {
     let alive = true;
@@ -73,13 +81,11 @@ export default function EventsFeed({ limit = 3 }) {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         const data = await r.json();
         if (!alive) return;
-        setEvents(Array.isArray(data.events) ? data.events : []);
-        setSource(data.source || 'mock');
+        setEvents(upcoming(Array.isArray(data.events) ? data.events : []));
       } catch {
         // No serverless runtime (dev) or network error → client sample.
         if (!alive) return;
-        setEvents(CLIENT_FALLBACK);
-        setSource('client-fallback');
+        setEvents(upcoming(CLIENT_FALLBACK));
       } finally {
         if (alive) setStatus('ready');
       }
@@ -105,7 +111,6 @@ export default function EventsFeed({ limit = 3 }) {
   }
 
   const shown = limit == null ? events : events.slice(0, limit);
-  const isLive = source === 'live';
 
   return (
     <div>
@@ -160,18 +165,6 @@ export default function EventsFeed({ limit = 3 }) {
           </Reveal>
         ))}
       </div>
-
-      {!isLive && (
-        <p className="mt-6 font-body text-sm text-burlap/80">
-          <ProposedString
-            id="events-sample"
-            note="Sample of our regular rhythm — the live Planning Center calendar replaces this once James connects his account."
-          >
-            Showing a sample of our regular rhythm — the live calendar goes here
-            once connected.
-          </ProposedString>
-        </p>
-      )}
     </div>
   );
 }
